@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ubika.pe - Encuentra Productos y Negocios en Trujillo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navegación -->
+  <header class="navbar">
+    <div class="logo">
+      <h1>Ubika<span>.pe</span></h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#catalogo">Productos</a></li>
+        <li><a href="#negocios">Negocios</a></li>
+        <li><a href="#registrar" class="btn-register">+ Registrar mi Negocio</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero con Buscador por Producto y Negocio -->
+  <section id="inicio" class="hero">
+    <div class="hero-content">
+      <h2>¿Qué producto o servicio buscas hoy en Trujillo?</h2>
+      <p>Encuentra dónde lo venden, compara opciones y contacta directo por WhatsApp.</p>
+      
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Ej. Zapatillas de cuero, stretch film, ceviche, repuestos..." onkeyup="filterItems()">
+        
+        <select id="districtSelect" onchange="filterItems()">
+          <option value="">Todo Trujillo</option>
+          <option value="El Porvenir">El Porvenir</option>
+          <option value="Trujillo Centro">Trujillo Centro</option>
+          <option value="Víctor Larco">Víctor Larco</option>
+        </select>
+
+        <select id="typeSelect" onchange="filterItems()">
+          <option value="">Todos los rubros</option>
+          <option value="Calzado">Calzado y Cuero</option>
+          <option value="Gastronomía">Gastronomía</option>
+          <option value="Empaques">Empaques y Suministros</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catálogo de Productos Promocionados -->
+  <section id="catalogo" class="catalog-section">
+    <div class="section-header">
+      <h2>Productos destacados en la ciudad</h2>
+      <p>Consulta disponibilidad directo con el vendedor</p>
+    </div>
+
+    <div class="card-grid" id="productGrid">
+      
+      <!-- Producto 1 -->
+      <article class="product-card" data-district="El Porvenir" data-rubro="Calzado">
+        <div class="card-tag">El Porvenir</div>
+        <div class="product-img">
+          <span class="placeholder-img">👟 Foto del Producto</span>
+        </div>
+        <div class="card-content">
+          <span class="business-name">Calzados El Porvenir</span>
+          <h3>Zapatos Mocasín de Cuero</h3>
+          <p class="description">Calzado 100% cuero vacuno para caballero. Venta al por mayor y menor.</p>
+          <div class="price-row">
+            <span class="price">S/ 85.00</span>
+            <span class="stock">Stock disponible</span>
+          </div>
+        </div>
+        <div class="card-action">
+          <a href="https://wa.me/51999999999?text=Hola,%20vi%20en%20Ubika.pe%20que%20tienen%20Zapatos%20Mocasín%20de%20Cuero.%20¿Tienen%20stock?" target="_blank" class="btn-whatsapp">
+            💬 Preguntar por WhatsApp
+          </a>
+        </div>
+      </article>
+
+      <!-- Producto 2 -->
+      <article class="product-card" data-district="Trujillo Centro" data-rubro="Empaques">
+        <div class="card-tag">Trujillo Centro</div>
+        <div class="product-img">
+          <span class="placeholder-img">📦 Foto del Producto</span>
+        </div>
+        <div class="card-content">
+          <span class="business-name">Embalajes Trujillo</span>
+          <h3>Stretch Film 20 Micras (Rollos)</h3>
+          <p class="description">Film estirable transparente para embalaje industrial y paletizado.</p>
+          <div class="price-row">
+            <span class="price">Consultar precio</span>
+            <span class="stock">Venta por mayor</span>
+          </div>
+        </div>
+        <div class="card-action">
+          <a href="https://wa.me/51999999999?text=Hola,%20vi%20en%20Ubika.pe%20el%20Stretch%20Film.%20Deseo%20cotizar." target="_blank" class="btn-whatsapp">
+            💬 Preguntar por WhatsApp
+          </a>
+        </div>
+      </article>
+
+      <!-- Producto 3 -->
+      <article class="product-card" data-district="Víctor Larco" data-rubro="Gastronomía">
+        <div class="card-tag">Víctor Larco</div>
+        <div class="product-img">
+          <span class="placeholder-img">🍲 Foto del Producto</span>
+        </div>
+        <div class="card-content">
+          <span class="business-name">Cevichería El Mochica</span>
+          <h3>Ceviche Mixto Tradicional</h3>
+          <p class="description">Acompañado de zarandaja, camote glaseado y chicharrón de pota.</p>
+          <div class="price-row">
+            <span class="price">S/ 38.00</span>
+            <span class="stock">Atención en local</span>
+          </div>
+        </div>
+        <div class="card-action">
+          <a href="https://wa.me/51999999999?text=Hola,%20vi%20en%20Ubika.pe%20el%20Ceviche%20Mixto.%20¿Puedo%20hacer%20reserva?" target="_blank" class="btn-whatsapp">
+            💬 Preguntar por WhatsApp
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- JS Filtro dinámico -->
+  <script>
+    function filterItems() {
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      const district = document.getElementById('districtSelect').value;
+      const rubro = document.getElementById('typeSelect').value;
+      const cards = document.querySelectorAll('.product-card');
+
+      cards.forEach(card => {
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        const business = card.querySelector('.business-name').textContent.toLowerCase();
+        const desc = card.querySelector('.description').textContent.toLowerCase();
+        
+        const cardDistrict = card.getAttribute('data-district');
+        const cardRubro = card.getAttribute('data-rubro');
+
+        const matchesSearch = title.includes(search) || business.includes(search) || desc.includes(search);
+        const matchesDistrict = district === "" || cardDistrict === district;
+        const matchesRubro = rubro === "" || cardRubro === rubro;
+
+        if (matchesSearch && matchesDistrict && matchesRubro) {
+          card.style.display = "flex";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
